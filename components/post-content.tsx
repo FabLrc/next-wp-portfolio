@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Post } from '@/types';
+import { AuthorWithAvatar } from './author-with-avatar';
+import { AuthorCard } from './author-card';
 
 interface PostContentProps {
   post: Post;
@@ -32,7 +34,7 @@ export function PostContent({ post }: PostContentProps) {
           {post.author?.node?.name && (
             <>
               <span>•</span>
-              <span>{post.author.node.name}</span>
+              <AuthorWithAvatar author={post.author} size="md" />
             </>
           )}
         </div>
@@ -62,14 +64,19 @@ export function PostContent({ post }: PostContentProps) {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 pt-8">
-        <Link
-          href="/blog"
-          className="inline-flex items-center px-4 py-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950 rounded-lg transition-colors"
-        >
-          <span className="mr-2">←</span>
-          Retour au blog
-        </Link>
+      <footer className="space-y-8">
+        {post.author?.node?.name && (
+          <AuthorCard author={post.author} />
+        )}
+        <div className="border-t border-slate-200 dark:border-slate-800 pt-8">
+          <Link
+            href="/blog"
+            className="inline-flex items-center px-4 py-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950 rounded-lg transition-colors"
+          >
+            <span className="mr-2">←</span>
+            Retour au blog
+          </Link>
+        </div>
       </footer>
     </article>
   );

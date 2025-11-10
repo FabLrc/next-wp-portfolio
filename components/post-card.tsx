@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Post } from '@/types';
+import { AuthorWithAvatar } from './author-with-avatar';
 
 interface PostCardProps {
   post: Post;
@@ -38,9 +39,13 @@ export function PostCard({ post }: PostCardProps) {
         </Link>
 
         {/* Meta */}
-        <div className="flex items-center gap-4 mb-4 text-sm text-slate-600 dark:text-slate-400">
-          <time dateTime={post.date}>{formattedDate}</time>
-          {post.author?.node?.name && <span>{post.author.node.name}</span>}
+        <div className="flex items-center justify-between mb-4">
+          <time dateTime={post.date} className="text-sm text-slate-600 dark:text-slate-400">
+            {formattedDate}
+          </time>
+          {post.author?.node?.name && (
+            <AuthorWithAvatar author={post.author} size="sm" showName={false} />
+          )}
         </div>
 
         {/* Excerpt */}
