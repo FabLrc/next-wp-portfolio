@@ -2,19 +2,30 @@
  * Type definitions for the portfolio application
  */
 
+export interface Author {
+  node: {
+    name: string;
+    avatar?: {
+      url: string;
+    };
+  };
+}
+
 export interface Post {
   id: string;
+  databaseId: number;
   title: string;
   slug: string;
   excerpt?: string;
-  content: string;
+  content?: string;
+  date: string;
+  author?: Author;
   featuredImage?: {
     node: {
       sourceUrl: string;
       altText?: string;
     };
   };
-  date: string;
 }
 
 export interface Project {
