@@ -58,3 +58,44 @@ export const GET_POST_BY_SLUG_QUERY = `
     }
   }
 `;
+
+export const GET_USER_PROFILE_QUERY = `
+  query GetUserProfile($slug: String!) {
+    user(id: $slug, idType: SLUG) {
+      name
+      description
+      avatar {
+        url
+      }
+    }
+  }
+`;
+
+export const GET_RECENT_POSTS_QUERY = `
+  query GetRecentPosts($first: Int = 3) {
+    posts(first: $first, where: { orderby: { field: DATE, order: DESC } }) {
+      nodes {
+        id
+        databaseId
+        title
+        slug
+        date
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        author {
+          node {
+            name
+            avatar {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`;
